@@ -4,6 +4,7 @@ import { BASE_ACTIONS } from './constants';
 import ActionSlot from './components/ActionSlot';
 import PlayerPanel from './components/PlayerPanel';
 import ScoringTable from './components/ScoringTable';
+import RoundTracker from './components/RoundTracker';
 
 const App: React.FC = () => {
   const { 
@@ -32,12 +33,17 @@ const App: React.FC = () => {
     <div className="flex flex-col items-center p-2 max-w-[1600px] mx-auto pb-20">
       
       {/* Top Bar */}
-      <div className="w-full max-w-6xl flex justify-between items-center bg-black/40 p-3 rounded-lg mb-4 backdrop-blur-sm border border-white/10">
-        <div className="bg-stone-800 px-4 py-1.5 rounded-full font-bold shadow-lg border border-stone-600">
-          Round {gameState.round}
+      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 justify-between items-center bg-black/40 p-3 rounded-lg mb-4 backdrop-blur-sm border border-white/10">
+        
+        {/* Round Tracker */}
+        <div className="flex-1 overflow-hidden w-full md:w-auto">
+            <RoundTracker currentRound={gameState.round} />
         </div>
-        <div className="bg-stone-800 px-4 py-1.5 rounded-full font-bold shadow-lg border border-stone-600 flex items-center gap-2">
-          Turn: <span style={{ color: activePlayer.color }}>{activePlayer.name}</span>
+
+        {/* Turn Indicator */}
+        <div className="bg-stone-800 px-6 py-2 rounded-full font-bold shadow-lg border border-stone-600 flex items-center gap-2 whitespace-nowrap min-w-fit">
+          <span className="text-gray-400 text-sm uppercase tracking-wider">Turn</span>
+          <span className="text-xl" style={{ color: activePlayer.color }}>{activePlayer.name}</span>
         </div>
       </div>
 
